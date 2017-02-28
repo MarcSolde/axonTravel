@@ -6,6 +6,12 @@
 	<groupId>com.example</groupId>
 	<artifactId>axonTravel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>coreapi</module>
+		<module>query</module>
+		<module>customers</module>
+		<module>orders</module>
+	</modules>
     <packaging>pom</packaging>
 
 	<name>axonTravel</name>
@@ -83,7 +89,7 @@
 		</dependency>
 	</dependencies>
 
-	<build>
+	<!--<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -131,7 +137,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>
+	</build>-->
 
 
 </project>

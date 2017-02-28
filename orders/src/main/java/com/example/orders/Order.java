@@ -5,7 +5,6 @@
  */
 package com.example.orders;
 
-import com.example.OrderState;
 import com.example.coreapi.*;
 import java.util.UUID;
 import lombok.NoArgsConstructor;
@@ -23,8 +22,6 @@ import org.axonframework.spring.stereotype.Aggregate;
 @Aggregate
 @NoArgsConstructor
 public class Order {
-    public Order() {
-    }
 
     @AggregateIdentifier
     private String orderId;

@@ -31,8 +31,6 @@ public class Customer {
         System.out.println("test post senging CustomerCreatedEvent");
     }
 
-    public Customer() {
-    }
 
     @EventSourcingHandler
     public void on(CustomerCreatedEvent e) {
