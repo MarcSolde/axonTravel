@@ -32,7 +32,7 @@ public class BuyingController {
         System.out.println("postOrder");
         return "OK "+custId;
     }
-
+/*
     @PostMapping("/newCust/")
     public String createCustomer(@RequestParam(value ="custId", required = false) String custId,@RequestParam("money") String money) {
         commandGateway.send(new CreateCustomerCommand((custId == null) ? UUID.randomUUID().toString() : custId, Integer.parseInt(money)));
@@ -44,5 +44,5 @@ public class BuyingController {
     public String buyProd(@RequestParam("custId") String custId, @RequestParam("cost") String cost ) {
         commandGateway.send(new CreateOrderCommand(UUID.randomUUID().toString(), custId, Integer.parseInt(cost)));
         return "A-OK";
-    }
+    }*/
 }

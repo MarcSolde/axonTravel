@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="coreapi" />
         <module name="customers" />
+        <module name="main" />
         <module name="orders" />
         <module name="query" />
       </profile>
@@ -16,6 +17,7 @@
       <module name="axonTravel" target="1.8" />
       <module name="coreapi" target="1.8" />
       <module name="customers" target="1.8" />
+      <module name="main" target="1.8" />
       <module name="orders" target="1.8" />
       <module name="query" target="1.8" />
     </bytecodeTargetLevel>

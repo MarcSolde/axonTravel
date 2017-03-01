@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingEventHandler {
 
-    /*@EventHandler
+    @EventHandler
     public void on(Object event) {
         System.out.println("EventRecieved:"+ event.toString());
-    }*/
+    }
 }

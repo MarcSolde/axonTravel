@@ -11,6 +11,7 @@
 		<module>query</module>
 		<module>customers</module>
 		<module>orders</module>
+		<module>main</module>
 	</modules>
     <packaging>pom</packaging>
 
