@@ -3,6 +3,7 @@ package com.example.query;
 import com.example.coreapi.CustomerCreatedEvent;
 import com.example.coreapi.PaymentAcceptedEvent;
 import com.example.coreapi.UpdateDBAfterPaymentEvent;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by msoldevi on 24/02/2017.
  */
 
+
+//TODO: maybe put this class inside App.java class
+@ProcessingGroup("customer")
 @RestController
 public class CustomerBalanceEventHandler {
 

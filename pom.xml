@@ -88,6 +88,11 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.axonframework</groupId>
+			<artifactId>axon-amqp</artifactId>
+			<version>RELEASE</version>
+		</dependency>
 	</dependencies>
 
 	<!--<build>

@@ -1,0 +1,46 @@
+version: '2'
+services:
+  customers:
+    build: ./customers
+    ports:
+     - "8080:8080"
+    links:
+     - query
+     - rabbitmq
+
+  orders:
+    build: ./orders
+    ports:
+     - "8082:8080"
+    links:
+     - query
+     - rabbitmq
+
+  query:
+    build: ./query
+    ports: 
+     - "8081:8080"
+    links:
+     - rabbitmq
+
+
+  main:
+    build: ./main
+    ports:
+     - "8083:8080"
+    links:
+     - rabbitmq
+  
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+     - "5672:5672"
+     - "15672:15672"
+    environment:
+     - RABBITMQ_DEFAULT_USER=test
+     - RABBITMQ_DEFAULT_PASS=password
+
+
+
+
