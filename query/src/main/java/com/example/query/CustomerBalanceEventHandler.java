@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 
-//TODO: maybe put this class inside App.java class
+//TODO: maybe put this class inside AppQuery.java class
 @ProcessingGroup("customer")
 @RestController
 public class CustomerBalanceEventHandler {

@@ -2,6 +2,7 @@ package com.example.query;
 
 import com.example.coreapi.*;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
  * Created by msoldevi on 24/02/2017.
  */
 
+@ProcessingGroup("order")
 @RestController
 public class OrderBalanceEventHandler {
 

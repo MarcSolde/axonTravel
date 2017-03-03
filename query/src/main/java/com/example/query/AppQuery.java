@@ -16,10 +16,10 @@ import java.util.List;
  * Created by msoldevi on 02/03/2017.
  */
 @SpringBootApplication
-public class App {
+public class AppQuery {
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(AppQuery.class, args);
     }
 
     @Bean
@@ -31,6 +31,20 @@ public class App {
             public void onMessage(Message message, Channel channel) throws Exception {
                 super.onMessage(message, channel);
             }
+
+        };
+    }
+
+    @Bean
+    public SpringAMQPMessageSource OrderSource(Serializer serializer) {
+        return new SpringAMQPMessageSource(new DefaultAMQPMessageConverter(serializer)) {
+
+            @RabbitListener(queues = "orderEvents")
+            @Override
+            public void onMessage(Message message, Channel channel) throws Exception {
+                super.onMessage(message, channel);
+            }
+
         };
     }
 
