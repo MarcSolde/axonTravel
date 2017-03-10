@@ -33,12 +33,12 @@ public class OrderBalanceEventHandler {
 
     @EventHandler
     public void on(OrderCreatedEvent e) {
-        commandGateway.send(new ReserveCreditCommand(e.getCustomerId(), e.getOrderId(), e.getCost()));
+        repository.save(new OrderBalance(e.getOrderId(), 0));
     }
 
     @EventHandler
     public void on(OrderAcceptedEvent e) {
-        repository.save(new OrderBalance(e.getOrderId(), 0)); //TODO: Change this Hardcoded BS
+        repository.save(new OrderBalance(e.getOrderId(), 1)); //TODO: Change this Hardcoded BS
     }
 
     @GetMapping("/order/{id}")

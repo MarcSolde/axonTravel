@@ -1,6 +1,7 @@
 package com.example.customers;
 
 import com.example.coreapi.CreateCustomerCommand;
+import com.example.coreapi.ReserveCreditCommand;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,11 @@ public class App {
         return "Customer Created!";
     }
 
-    @GetMapping("/test/")
+    @GetMapping("/reserveCreditCmd/{custId}/{orderId}/{money}/")
     @ResponseBody
-    public String test() {
-        return "EZPZ";
+    public void reserveCredit(@PathVariable String custId, @PathVariable String orderId,
+                              @PathVariable String money) {
+        commandGateway.send(new ReserveCreditCommand(custId, orderId, Integer.parseInt(money)));
     }
 
 
@@ -63,5 +65,7 @@ public class App {
         admin.declareExchange(exchange());
         admin.declareBinding(binding());
     }
+
+
 
 }

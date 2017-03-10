@@ -52,13 +52,9 @@ public class Customer {
     @EventSourcingHandler
     public void on(PaymentAcceptedEvent e) {
         this.money -= e.getMoney();
-        apply(new ApproveOrderCommand(e.getOrderId(), e.getCustomerId()));
+        //apply(new ApproveOrderCommand(e.getOrderId(), e.getCustomerId()));
     }
 
-    @CommandHandler
-    public void handle(UpdateDBCommand c) {
-        apply(new UpdateDBAfterPaymentEvent(c.getOrderId(), c.getMoney(), c.getCustomerId()));
-    }
 
     @EventSourcingHandler
     public void on(PaymentRejectedEvent e) {

@@ -50,7 +50,7 @@ public class Order {
     @EventSourcingHandler
     public void on(OrderAcceptedEvent e) {
         this.state = OrderState.APPROVED;
-        apply(new UpdateDBAfterPaymentEvent(e.getOrderId(), 100, "1234")); //TODO: Change this harcoded bs
+        System.out.println("orderacceptedEvent");
     }
 
     @CommandHandler

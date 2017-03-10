@@ -1,8 +1,13 @@
 package com.example.orders;
 
 import com.example.coreapi.CreateOrderCommand;
+import com.rabbitmq.client.Channel;
+import org.axonframework.amqp.eventhandling.DefaultAMQPMessageConverter;
+import org.axonframework.amqp.eventhandling.spring.SpringAMQPMessageSource;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.axonframework.serialization.Serializer;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -60,5 +65,18 @@ public class App {
         admin.declareQueue(queue());
         admin.declareExchange(exchange());
         admin.declareBinding(binding());
+    }
+
+    @Bean
+    public SpringAMQPMessageSource CustomerSource(Serializer serializer) {
+        return new SpringAMQPMessageSource(new DefaultAMQPMessageConverter(serializer)) {
+
+            @RabbitListener(queues = "customerEvents")
+            @Override
+            public void onMessage(Message message, Channel channel) throws Exception {
+                super.onMessage(message, channel);
+            }
+
+        };
     }
 }
