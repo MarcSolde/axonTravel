@@ -29,14 +29,12 @@ public class CustomerBalanceEventHandler {
 
     @EventHandler
     public void on(CustomerCreatedEvent event) {
-        System.out.println("AAA");
         repository.save(new CustomerBalance(event.getCustomerId(), event.getMoney()));
     }
 
     @EventHandler
     public void on(PaymentAcceptedEvent e) {
-        //TODO:Update dinero restante
-        System.out.println("ABCDEFG");
+        repository.save(new CustomerBalance(e.getCustomerId(), repository.findOne(e.getCustomerId()).getMoney() - e.getCost()));
     }
 
 

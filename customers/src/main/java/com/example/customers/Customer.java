@@ -48,10 +48,12 @@ public class Customer {
     @CommandHandler
     public void handle(BuyProductCommand cmd) {
         if (this.money >= cmd.getCost()) {
-            apply(new PaymentAcceptedEvent(cmd.getCost()));
+            apply(new PaymentAcceptedEvent(customerId, cmd.getCost()));
+        } else if (this.money < cmd.getCost()) {
+            apply(new PaymentRejectedEvent(cmd.getCost()));
         }
-        else apply (new PaymentRejectedEvent(cmd.getCost()));
     }
+
 
     @EventSourcingHandler
     public void on(PaymentAcceptedEvent e) {

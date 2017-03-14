@@ -60,7 +60,7 @@ public class Order {
     @CommandHandler
     public void handle(ApproveOrderCommand cmd) {
         System.out.println("HO-LA");
-        apply(new OrderAcceptedEvent(orderId));
+        apply(new OrderAcceptedEvent(orderId, customerId, cost));
     }
     
     @EventSourcingHandler

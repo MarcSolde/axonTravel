@@ -22,8 +22,8 @@ import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 @RestController
 public class OrderBalanceEventHandler {
 
-    @Inject
-    private transient CommandGateway commandGateway;
+    //@Inject
+    //private transient CommandGateway commandGateway;
 
     private final OrderBalanceRepository repository;
 
@@ -33,13 +33,17 @@ public class OrderBalanceEventHandler {
 
     @EventHandler
     public void on(OrderCreatedEvent e) {
-        repository.save(new OrderBalance(e.getOrderId(), 0));
+        repository.save(new OrderBalance(e.getOrderId(), e.getCost(), e.getCustomerId(), "CREATED"));
     }
 
     @EventHandler
     public void on(OrderAcceptedEvent e) {
-        System.out.println("chivato guardar order aceptado");
-        repository.save(new OrderBalance(e.getOrderId(), 1)); //TODO: Change this Hardcoded BS
+        repository.save(new OrderBalance(e.getOrderId(), e.getCost(), e.getCustomerId(), "ACCEPTED"));
+    }
+
+    @EventHandler
+    public void on(OrderRejectedEvent e) {
+        repository.save(new OrderBalance(e.getOrderId(),-1 ,null ,"REJECTED"));
     }
 
     @GetMapping("/order/{id}/")

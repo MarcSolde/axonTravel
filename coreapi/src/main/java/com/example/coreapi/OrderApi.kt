@@ -18,4 +18,4 @@ class RejectOrderCommand(@TargetAggregateIdentifier val orderId: String)
 
 class OrderCreatedEvent(val orderId: String, val customerId: String, val cost: Int)
 class OrderRejectedEvent(val orderId: String)
-class OrderAcceptedEvent(val orderId: String)
+class OrderAcceptedEvent(val orderId: String, val customerId: String, val cost: Int)

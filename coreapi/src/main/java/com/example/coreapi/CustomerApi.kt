@@ -12,4 +12,4 @@ class BuyProductCommand(@TargetAggregateIdentifier val customerId: String, val o
 
 class CustomerCreatedEvent(val customerId: String, val money: Int)
 class PaymentRejectedEvent(val cost: Int)
-class PaymentAcceptedEvent(val cost: Int)
+class PaymentAcceptedEvent(val customerId: String, val cost: Int)
