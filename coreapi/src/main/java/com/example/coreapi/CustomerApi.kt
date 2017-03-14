@@ -7,11 +7,9 @@ import org.axonframework.commandhandling.TargetAggregateIdentifier
  */
 
 class CreateCustomerCommand(val customerId: String, val money: Int)
-class ReserveCreditCommand(@TargetAggregateIdentifier val customerId: String, 
-                           val orderId: String, val money: Int)
-class UpdateDBCommand(val orderId: String, val money: Int, val customerId: String)
+class ReserveCreditCommand(@TargetAggregateIdentifier val customerId: String, val cost: Int)
+class BuyProductCommand(@TargetAggregateIdentifier val customerId: String, val orderId:String, val cost:Int )
 
 class CustomerCreatedEvent(val customerId: String, val money: Int)
-class PaymentRejectedEvent(val orderId: String, val money: Int, val customerId: String)
-class PaymentAcceptedEvent(val orderId: String, val money: Int, val customerId: String)
-class UpdateDBAfterPaymentEvent(val orderId: String, val money: Int, val customerId: String)
+class PaymentRejectedEvent(val cost: Int)
+class PaymentAcceptedEvent(val cost: Int)

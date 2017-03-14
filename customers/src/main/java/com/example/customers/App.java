@@ -1,5 +1,6 @@
 package com.example.customers;
 
+import com.example.coreapi.BuyProductCommand;
 import com.example.coreapi.CreateCustomerCommand;
 import com.example.coreapi.ReserveCreditCommand;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -36,11 +37,11 @@ public class App {
         return "Customer Created!";
     }
 
-    @GetMapping("/reserveCreditCmd/{custId}/{orderId}/{money}/")
+    @PostMapping("/buyProd/")
     @ResponseBody
-    public void reserveCredit(@PathVariable String custId, @PathVariable String orderId,
-                              @PathVariable String money) {
-        commandGateway.send(new ReserveCreditCommand(custId, orderId, Integer.parseInt(money)));
+    public String buyProduct(@RequestParam String custId, @RequestParam String prodId, @RequestParam String cost) {
+        commandGateway.send(new BuyProductCommand(custId, prodId, Integer.parseInt(cost)));
+        return "buyProd";
     }
 
 

@@ -38,15 +38,16 @@ public class OrderBalanceEventHandler {
 
     @EventHandler
     public void on(OrderAcceptedEvent e) {
+        System.out.println("chivato guardar order aceptado");
         repository.save(new OrderBalance(e.getOrderId(), 1)); //TODO: Change this Hardcoded BS
     }
 
-    @GetMapping("/order/{id}")
+    @GetMapping("/order/{id}/")
     public OrderBalance getOrders(@PathVariable String id) {
         return repository.findOne(id);
     }
 
-    @GetMapping("/order")
+    @GetMapping("/order/")
     public List<OrderBalance> getOrders() {
         return repository.findAll();
     }

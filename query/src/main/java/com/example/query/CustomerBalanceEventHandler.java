@@ -2,13 +2,14 @@ package com.example.query;
 
 import com.example.coreapi.CustomerCreatedEvent;
 import com.example.coreapi.PaymentAcceptedEvent;
-import com.example.coreapi.UpdateDBAfterPaymentEvent;
 import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by msoldevi on 24/02/2017.
@@ -33,14 +34,19 @@ public class CustomerBalanceEventHandler {
     }
 
     @EventHandler
-    public void on(UpdateDBAfterPaymentEvent e) {
-        System.out.println("Ayyyyyy");
-        repository.save(new CustomerBalance(e.getCustomerId(), repository.findOne(e.getCustomerId()).getMoney() - e.getMoney()));
+    public void on(PaymentAcceptedEvent e) {
+        //TODO:Update dinero restante
+        System.out.println("ABCDEFG");
     }
 
 
-    @GetMapping("/balance/{id}")
+    @GetMapping("/balance/{id}/")
     public CustomerBalance getBalance(@PathVariable String id) {
         return repository.findOne(id);
+    }
+
+    @GetMapping("/balance/")
+    public List<CustomerBalance> getOrders() {
+        return repository.findAll();
     }
 }

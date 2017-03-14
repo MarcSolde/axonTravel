@@ -1,6 +1,8 @@
 package com.example.orders;
 
+import com.example.coreapi.ApproveOrderCommand;
 import com.example.coreapi.CreateOrderCommand;
+import com.example.coreapi.RejectOrderCommand;
 import com.rabbitmq.client.Channel;
 import org.axonframework.amqp.eventhandling.DefaultAMQPMessageConverter;
 import org.axonframework.amqp.eventhandling.spring.SpringAMQPMessageSource;
@@ -31,18 +33,20 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
-    @PostMapping("/buyProd/")
+    @GetMapping("/confirmOrder/{cost}/{custId}/")
     @ResponseBody
-    public String buyProd(@RequestParam("custId") String custId, @RequestParam("cost") String cost ) {
+    public void confirmOrder(@PathVariable String cost, @PathVariable String custId) {
         String s = UUID.randomUUID().toString();
         commandGateway.send(new CreateOrderCommand(s , custId, Integer.parseInt(cost)));
-        return s;
+        commandGateway.send(new ApproveOrderCommand(s, custId));
     }
 
-    @GetMapping("/testOrders/")
+    @GetMapping("/rejectOrder/{cost}/{custId}/")
     @ResponseBody
-    public String test2() {
-        return "hello-lo-lo";
+    public void rejectOrder(@PathVariable String cost, @PathVariable String custId) {
+        String s = UUID.randomUUID().toString();
+        commandGateway.send(new CreateOrderCommand(s , custId, Integer.parseInt(cost)));
+        commandGateway.send(new RejectOrderCommand(s));
     }
 
     @Bean
@@ -67,16 +71,4 @@ public class App {
         admin.declareBinding(binding());
     }
 
-    @Bean
-    public SpringAMQPMessageSource CustomerSource(Serializer serializer) {
-        return new SpringAMQPMessageSource(new DefaultAMQPMessageConverter(serializer)) {
-
-            @RabbitListener(queues = "customerEvents")
-            @Override
-            public void onMessage(Message message, Channel channel) throws Exception {
-                super.onMessage(message, channel);
-            }
-
-        };
-    }
 }

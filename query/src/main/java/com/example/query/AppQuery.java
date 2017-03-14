@@ -29,6 +29,7 @@ public class AppQuery {
             @RabbitListener(queues = "customerEvents")
             @Override
             public void onMessage(Message message, Channel channel) throws Exception {
+                System.out.println("I just got a message from Customers!");
                 super.onMessage(message, channel);
             }
 
@@ -42,6 +43,7 @@ public class AppQuery {
             @RabbitListener(queues = "orderEvents")
             @Override
             public void onMessage(Message message, Channel channel) throws Exception {
+                System.out.println("I just got a message from Orders!");
                 super.onMessage(message, channel);
             }
 

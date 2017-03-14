@@ -6,6 +6,7 @@ import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.spring.stereotype.Aggregate;
+import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -41,23 +42,32 @@ public class Customer {
 
     @CommandHandler
     public void handle(ReserveCreditCommand cmd) {
-        if (money >= cmd.getMoney())  {
-            apply(new PaymentAcceptedEvent(cmd.getOrderId(), cmd.getMoney(), cmd.getCustomerId()));
+
+    }
+
+    @CommandHandler
+    public void handle(BuyProductCommand cmd) {
+        if (this.money >= cmd.getCost()) {
+            apply(new PaymentAcceptedEvent(cmd.getCost()));
         }
-        else {
-            apply(new PaymentRejectedEvent(cmd.getOrderId(), cmd.getMoney(), cmd.getCustomerId()));
-        }
+        else apply (new PaymentRejectedEvent(cmd.getCost()));
     }
 
     @EventSourcingHandler
     public void on(PaymentAcceptedEvent e) {
-        this.money -= e.getMoney();
-        //apply(new ApproveOrderCommand(e.getOrderId(), e.getCustomerId()));
+        this.money -= e.getCost();
+        RestTemplate restTemplate = new RestTemplate();
+        String obj = restTemplate.getForObject("http://localhost:8082/confirmOrder/"+ e.getCost()+"/"
+                +customerId+"/", String.class);
+        System.out.println("coinfirmOrder called");
     }
 
 
     @EventSourcingHandler
     public void on(PaymentRejectedEvent e) {
-
+        RestTemplate restTemplate = new RestTemplate();
+        String obj = restTemplate.getForObject("http://localhost:8082/rejectOrder/"+ e.getCost()+"/"
+                +customerId+"/", String.class);
+        System.out.println("RejectORder called");
     }
 }
