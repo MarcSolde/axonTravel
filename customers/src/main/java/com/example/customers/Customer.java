@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import java.util.UUID;
+
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
 /**
@@ -48,9 +50,9 @@ public class Customer {
     @CommandHandler
     public void handle(BuyProductCommand cmd) {
         if (this.money >= cmd.getCost()) {
-            apply(new PaymentAcceptedEvent(customerId, cmd.getCost()));
+            apply(new PaymentAcceptedEvent(customerId, cmd.getCost(), UUID.randomUUID().toString()));
         } else if (this.money < cmd.getCost()) {
-            apply(new PaymentRejectedEvent(cmd.getCost()));
+            apply(new PaymentRejectedEvent(cmd.getCost(), UUID.randomUUID().toString()));
         }
     }
 
@@ -58,18 +60,12 @@ public class Customer {
     @EventSourcingHandler
     public void on(PaymentAcceptedEvent e) {
         this.money -= e.getCost();
-        RestTemplate restTemplate = new RestTemplate();
-        String obj = restTemplate.getForObject("http://localhost:8082/confirmOrder/"+ e.getCost()+"/"
-                +customerId+"/", String.class);
-        System.out.println("coinfirmOrder called");
+
     }
 
 
     @EventSourcingHandler
     public void on(PaymentRejectedEvent e) {
-        RestTemplate restTemplate = new RestTemplate();
-        String obj = restTemplate.getForObject("http://localhost:8082/rejectOrder/"+ e.getCost()+"/"
-                +customerId+"/", String.class);
-        System.out.println("RejectORder called");
+
     }
 }

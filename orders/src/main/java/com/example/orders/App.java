@@ -33,20 +33,20 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
-    @GetMapping("/confirmOrder/{cost}/{custId}/")
+    @GetMapping("/confirmOrder/{cost}/{custId}/{orderId}")
     @ResponseBody
-    public void confirmOrder(@PathVariable String cost, @PathVariable String custId) {
+    public void confirmOrder(@PathVariable String cost, @PathVariable String custId, @PathVariable String orderId) {
         String s = UUID.randomUUID().toString();
-        commandGateway.send(new CreateOrderCommand(s , custId, Integer.parseInt(cost)));
-        commandGateway.send(new ApproveOrderCommand(s, custId));
+        commandGateway.send(new CreateOrderCommand(orderId , custId, Integer.parseInt(cost)));
+        commandGateway.send(new ApproveOrderCommand(orderId, custId));
     }
 
-    @GetMapping("/rejectOrder/{cost}/{custId}/")
+    @GetMapping("/rejectOrder/{cost}/{orderId}")
     @ResponseBody
-    public void rejectOrder(@PathVariable String cost, @PathVariable String custId) {
+    public void rejectOrder(@PathVariable String cost,  @PathVariable String orderId) {
         String s = UUID.randomUUID().toString();
-        commandGateway.send(new CreateOrderCommand(s , custId, Integer.parseInt(cost)));
-        commandGateway.send(new RejectOrderCommand(s));
+        commandGateway.send(new CreateOrderCommand(orderId , "0", Integer.parseInt(cost)));
+        commandGateway.send(new RejectOrderCommand(orderId));
     }
 
     @Bean
