@@ -1,5 +1,9 @@
 # axonTravel
+
 Sample app for Axon Framework
+
+![](http://forthebadge.com/images/badges/built-by-developers.svg)
+![](http://forthebadge.com/images/badges/powered-by-electricity.svg)
 
 All running on a tomcat server @localhost:8080
 
