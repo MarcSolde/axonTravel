@@ -16,3 +16,7 @@ API paths
 /order/id - Gives the id and cost of a Order with id as {id} (Cost not fully implemented tho)
 
 /order - Gives a list of all Orders giving away their id and cost.
+
+
+in order to get a runnable .jar with any microservice, run
+`mvn package`
