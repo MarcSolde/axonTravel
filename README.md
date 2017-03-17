@@ -24,7 +24,7 @@ Also you need a rabbitMQ running on local with default configuration enabled.
 
   - _GET_ **:8081/balance/** Gives a list of all customers and their respective balance
 
-  - _GET_ **:8081/order/{id}/** - Gives the id and cost of a Order with id as {id} (Cost not fully implemented tho)
+  - _GET_ **:8081/order/{id}/** - Gives the id and cost of a Order with id as {id}
   
   - _GET_ **:8081/order/** - Gives a list of all Orders giving away their id and cost.
 
