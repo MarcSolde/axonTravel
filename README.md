@@ -2,10 +2,8 @@
 
 Sample app for Axon Framework using microservices, ES and CQRS.
 
-![](http://forthebadge.com/images/badges/built-by-developers.svg)
-
-![](http://forthebadge.com/images/badges/powered-by-electricity.svg)
-
+![](http://forthebadge.com/images/badges/built-by-developers.svg) <br />
+![](http://forthebadge.com/images/badges/powered-by-electricity.svg)<br />
 ![](http://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)
 
 ## Configuration
