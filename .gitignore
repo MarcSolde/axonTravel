@@ -100,3 +100,10 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/intellij,netbeans,java,maven
+axonTravel.iml
+mvnw
+mvnw.cmd
+nb-configuration.xml
+.idea/
+.mvn/
+nbproject/
