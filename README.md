@@ -13,7 +13,9 @@ The microservices are supposed to be running on local on the port:
   - **8081** - Query Microservice
   - **8082** - Order Microservice
 
-Also you need a rabbitMQ running on local with default configuration enabled.
+Also you need a rabbitMQ running on local with default configuration enabled and a MySQL database running on a docker container (you can check the configuration at `customers/src/main/resources/application.properties`).
+
+The rabbitMQ is used to send messages between the different microservices and the MySQL database is used to exemplify the persistence of an eventStore (keep in mind that the persistence is only implemented in the _customers_ microservice, since it is supposed to be an example)
   
 ## API paths
 
